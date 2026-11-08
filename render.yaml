@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: perpustakaan-sma-alfadllu-4
+    runtime: python
+    plan: free
+    buildCommand: python -c "import ast; ast.parse(open('app.py', encoding='utf-8').read())"
+    startCommand: python app.py
+    healthCheckPath: /api/books
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0

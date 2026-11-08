@@ -1,0 +1,2777 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perpustakaan Digital SMA ALFADLLU 4 BREBES</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="IMG-20250802-WA0014-removebg-preview.png"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* Pengaturan Font Global ke Times New Roman */
+      body {
+        font-family: "Times New Roman", Times, serif;
+        overflow-x: hidden;
+        background-color: #f8fafc;
+      }
+
+      /* Animasi Loading Bar */
+      @keyframes loading-progress {
+        0% {
+          width: 0%;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+      .animate-loading {
+        animation: loading-progress 3s linear forwards;
+      }
+
+      /* Latar Belakang Hero dengan Overlay Gelap */
+      .hero-bg {
+        background:
+          linear-gradient(
+            115deg,
+            rgba(5, 46, 22, 0.92),
+            rgba(20, 83, 45, 0.72)
+          ),
+          url("https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=1920&q=80")
+            center/cover no-repeat;
+      }
+      .hero-bg::after {
+        content: "";
+        position: absolute;
+        width: 18rem;
+        height: 18rem;
+        right: 8%;
+        bottom: -3rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 2rem rgba(255, 255, 255, 0.04),
+          0 0 0 4rem rgba(255, 255, 255, 0.03);
+        pointer-events: none;
+      }
+      .home-feature-card {
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease;
+      }
+      .home-feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+      }
+      .book-result-card {
+        animation: result-enter 220ms ease-out both;
+      }
+      @keyframes result-enter {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Kustomisasi Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #14532d;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #052e16;
+      }
+
+      [class*="bg-[#017a82]"] {
+        background-color: #14532d !important;
+      }
+      [class*="bg-[#009b9f]"] {
+        background-color: #166534 !important;
+      }
+      [class*="bg-[#e0f2f1]"] {
+        background-color: #dcfce7 !important;
+      }
+      [class*="text-[#017a82]"] {
+        color: #14532d !important;
+      }
+      [class*="text-[#009b9f]"] {
+        color: #166534 !important;
+      }
+      [class*="hover:text-[#017a82]"]:hover {
+        color: #14532d !important;
+      }
+      [class*="border-[#009b9f]"] {
+        border-color: #166534 !important;
+      }
+      [class*="ring-[#009b9f]"] {
+        --tw-ring-color: #166534 !important;
+      }
+      [hidden] {
+        display: none !important;
+      }
+
+      /* Style khusus untuk Dropdown agar lebih mulus transisinya (opsional) */
+      .dropdown-menu {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .group:hover .dropdown-menu {
+        display: block;
+        opacity: 1;
+        animation: fadeIn 0.2s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      :root {
+        color-scheme: light;
+        --library-forest: #123d2e;
+        --library-green: #176b4d;
+        --library-mint: #eaf5ee;
+        --library-cream: #fbf8f0;
+        --library-ink: #20352b;
+        --library-muted: #68786f;
+        --library-gold: #e9b949;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
+      }
+
+      body {
+        background:
+          radial-gradient(ellipse at 10% 12%, rgba(233, 185, 73, 0.08), transparent 28rem),
+          #f7f8f4;
+        color: var(--library-ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.65;
+      }
+
+      #loading-screen {
+        background:
+          radial-gradient(circle at 50% 35%, rgba(54, 133, 92, 0.55), transparent 28rem),
+          var(--library-forest);
+      }
+
+      #main-content > div:first-child {
+        background-color: var(--library-green);
+        letter-spacing: 0.025em;
+      }
+
+      nav {
+        background-color: var(--library-forest);
+        box-shadow: 0 8px 24px rgba(13, 46, 33, 0.16);
+      }
+
+      nav img {
+        border-radius: 0.75rem;
+      }
+
+      nav a,
+      nav button {
+        transition:
+          color 180ms ease,
+          background-color 180ms ease;
+      }
+
+      .dropdown-menu {
+        border-radius: 0 0 1rem 1rem;
+        box-shadow: 0 18px 38px rgba(18, 61, 46, 0.18);
+        overflow: hidden;
+      }
+
+      .dropdown-menu a:hover {
+        background: var(--library-mint);
+      }
+
+      .hero-bg {
+        isolation: isolate;
+        background:
+          linear-gradient(115deg, rgba(10, 43, 31, 0.94), rgba(20, 83, 58, 0.78)),
+          url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1920&q=85")
+            center 48% / cover no-repeat;
+      }
+
+      .hero-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background:
+          radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.12), transparent 55%),
+          linear-gradient(0deg, rgba(10, 43, 31, 0.18), transparent 60%);
+        pointer-events: none;
+      }
+
+      .hero-bg::after {
+        width: 23rem;
+        height: 23rem;
+        right: 7%;
+        bottom: -7rem;
+        border-color: rgba(233, 185, 73, 0.26);
+        box-shadow:
+          0 0 0 2.5rem rgba(233, 185, 73, 0.055),
+          0 0 0 5rem rgba(255, 255, 255, 0.035);
+      }
+
+      .hero-bg h1 {
+        letter-spacing: -0.045em;
+        text-wrap: balance;
+      }
+
+      .hero-bg h1 span {
+        color: #f5d276;
+      }
+
+      .hero-bg a:first-child {
+        background: var(--library-gold);
+        box-shadow: 0 10px 24px rgba(8, 29, 21, 0.2);
+      }
+
+      .hero-bg a:first-child:hover {
+        background: #f2ca65;
+        transform: translateY(-2px);
+      }
+
+      .home-feature-card {
+        border-color: rgba(23, 107, 77, 0.12);
+        box-shadow: 0 8px 24px rgba(22, 56, 40, 0.07);
+      }
+
+      .home-feature-card:hover {
+        border-color: rgba(23, 107, 77, 0.28);
+        box-shadow: 0 18px 36px rgba(22, 56, 40, 0.13);
+      }
+
+      #catalog-search {
+        border-color: rgba(23, 107, 77, 0.12);
+        box-shadow: 0 20px 55px rgba(18, 61, 46, 0.14);
+      }
+
+      #catalog-search input {
+        font-size: 1rem;
+      }
+
+      #catalog-search input::placeholder {
+        color: #8a9890;
+      }
+
+      #catalog-search button {
+        background: var(--library-green);
+        box-shadow: 0 6px 16px rgba(23, 107, 77, 0.2);
+      }
+
+      #catalog-search button:hover {
+        background: var(--library-forest);
+      }
+
+      .interest-button {
+        transition:
+          color 180ms ease,
+          background-color 180ms ease,
+          border-color 180ms ease,
+          transform 180ms ease;
+      }
+
+      .interest-button:hover,
+      .interest-button:focus-visible {
+        background: var(--library-green);
+        border-color: var(--library-green);
+        color: white;
+        transform: translateY(-1px);
+      }
+
+      section[aria-labelledby] {
+        position: relative;
+      }
+
+      section[aria-labelledby] h2 {
+        letter-spacing: -0.035em;
+        text-wrap: balance;
+      }
+
+      section[aria-labelledby] article {
+        border-color: rgba(23, 107, 77, 0.1);
+        box-shadow: 0 8px 24px rgba(22, 56, 40, 0.045);
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          border-color 180ms ease;
+      }
+
+      section[aria-labelledby] article:hover {
+        border-color: rgba(23, 107, 77, 0.22);
+        box-shadow: 0 16px 34px rgba(22, 56, 40, 0.1);
+        transform: translateY(-3px);
+      }
+
+      .book-result-card {
+        border-color: rgba(23, 107, 77, 0.13);
+        box-shadow: 0 10px 26px rgba(22, 56, 40, 0.07);
+      }
+
+      .book-result-card:hover {
+        box-shadow: 0 16px 34px rgba(22, 56, 40, 0.12);
+      }
+
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible {
+        outline: 3px solid rgba(233, 185, 73, 0.9);
+        outline-offset: 3px;
+      }
+
+      @media (max-width: 640px) {
+        .hero-bg {
+          padding-top: 3.5rem;
+          padding-bottom: 8rem;
+          background-position: 58% center;
+        }
+
+        .hero-bg h1 {
+          font-size: clamp(2.4rem, 11vw, 3.4rem);
+        }
+
+        .home-feature-card {
+          padding: 0.85rem;
+        }
+
+        #catalog-search {
+          border-radius: 1.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="text-gray-800 flex flex-col min-h-screen">
+    <!-- ================= 1. LOADING SCREEN ================= -->
+    <div
+      id="loading-screen"
+      class="fixed inset-0 z-[100] bg-[#017a82] flex flex-col items-center justify-center transition-opacity duration-500 ease-in-out"
+    >
+      <img
+        src="IMG-20250802-WA0014-removebg-preview.png"
+        class="w-28 h-28 mb-6 drop-shadow-2xl object-contain bg-white rounded-full p-1"
+        alt="Logo"
+        onerror="this.src = 'https://via.placeholder.com/150?text=Logo'"
+      />
+      <h1
+        class="text-white font-semibold text-2xl md:text-3xl tracking-wide text-center px-4"
+      >
+        PERPUSTAKAAN DIGITAL
+      </h1>
+      <h2
+        class="text-yellow-400 font-medium text-lg md:text-xl mt-2 tracking-widest text-center px-4"
+      >
+        SMA ALFADLLU 4 BREBES
+      </h2>
+
+      <!-- Garis Loading Kuning -->
+      <div
+        class="w-64 md:w-80 h-1.5 bg-black/30 mt-10 rounded-full overflow-hidden"
+      >
+        <div
+          class="h-full bg-yellow-400 animate-loading shadow-[0_0_10px_rgba(250,204,21,0.9)] rounded-full"
+        ></div>
+      </div>
+    </div>
+
+    <!-- ================= 2. MAIN CONTENT ================= -->
+    <div
+      id="main-content"
+      class="hidden opacity-0 transition-opacity duration-700 ease-in-out flex-grow flex flex-col"
+    >
+      <!-- TOP BAR BERITA TERBARU -->
+      <div
+        class="bg-[#009b9f] text-white text-xs py-2 flex items-center relative overflow-hidden"
+      >
+        <div
+          class="font-bold flex items-center gap-2 whitespace-nowrap bg-[#009b9f] px-4 py-1 z-10"
+        >
+          <i class="far fa-newspaper"></i> Berita Terbaru
+        </div>
+        <marquee class="text-white/90 font-medium flex-1">
+          Selamat Datang di Perpustakaan Digital SMA Alfadllu 4 Brebes •
+          Tingkatkan literasi dengan membaca setiap hari • Waktu layanan
+          operasional perpustakaan Senin - Jumat Pukul 07.30 - 15.00 WIB
+        </marquee>
+      </div>
+
+      <!-- NAVBAR UTAMA -->
+      <nav
+        class="bg-[#017a82] text-white shadow-md sticky top-0 z-50 px-4 md:px-8 flex items-center justify-between h-16 border-t border-[#009b9f]/30"
+      >
+        <div class="flex items-center gap-3">
+          <img
+            src="IMG-20250802-WA0014-removebg-preview.png"
+            class="w-10 h-10 object-contain bg-white rounded p-0.5 hidden md:block"
+            alt="Logo"
+            onerror="this.src = 'https://via.placeholder.com/40'"
+          />
+          <div class="font-bold text-lg tracking-wider uppercase">
+            Pustaka Alfadllu 4
+          </div>
+        </div>
+
+        <!-- Menu Navigasi dengan Dropdown -->
+        <ul
+          class="hidden lg:flex items-center gap-6 text-sm font-medium h-full"
+        >
+          <li class="h-full flex items-center">
+            <a href="#beranda" class="border-b-2 border-white pb-1">Beranda</a>
+          </li>
+
+          <!-- Dropdown Tentang Kami -->
+          <li class="h-full flex items-center group relative">
+            <a
+              href="#"
+              class="hover:text-gray-200 transition-colors flex items-center gap-1 h-full cursor-default"
+            >
+              Tentang Kami <i class="fas fa-caret-down text-xs ml-1"></i>
+            </a>
+            <!-- Isi Dropdown -->
+            <ul
+              class="dropdown-menu absolute top-full left-0 w-56 bg-[#f4f6f8] text-[#2c3e50] rounded-b-lg shadow-xl border border-gray-200 py-2"
+            >
+              <li>
+                <a
+                  href="#sejarah"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Sejarah</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#visi-misi"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Visi dan Misi</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#struktur-organisasi"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Struktur Organisasi</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#pustakawan"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Pustakawan</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#fasilitas"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Fasilitas</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#tata-tertib"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Tata Tertib</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#jam-layanan"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Jam Layanan</a
+                >
+              </li>
+            </ul>
+          </li>
+
+          <!-- Dropdown Layanan Perpustakaan -->
+          <li class="h-full flex items-center group relative">
+            <a
+              href="#"
+              class="hover:text-gray-200 transition-colors flex items-center gap-1 h-full cursor-default"
+            >
+              Layanan Perpustakaan
+              <i class="fas fa-caret-down text-xs ml-1"></i>
+            </a>
+            <ul
+              class="dropdown-menu absolute top-full left-0 w-72 bg-[#f4f6f8] text-[#2c3e50] rounded-b-lg shadow-xl border border-gray-200 py-2"
+            >
+              <li>
+                <a
+                  href="#layanan-sirkulasi"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Layanan Sirkulasi</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#layanan-baca"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Layanan Baca di Tempat</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#layanan-referensi"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Layanan Referensi</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#layanan-penelusuran"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Layanan Penelusuran Informasi</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#layanan-literasi"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Layanan Bimbingan Literasi Informasi</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#layanan-konsultasi"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Layanan Konsultasi</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#layanan-ekstensi"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Layanan Ekstensi</a
+                >
+              </li>
+            </ul>
+          </li>
+
+          <li class="h-full flex items-center">
+            <a href="#" class="hover:text-gray-200 transition-colors"
+              >Berita Perpustakaan</a
+            >
+          </li>
+
+          <!-- Dropdown Keanggotaan -->
+          <li class="h-full flex items-center group relative">
+            <a
+              href="#"
+              class="hover:text-gray-200 transition-colors flex items-center gap-1 h-full cursor-default"
+            >
+              Keanggotaan <i class="fas fa-caret-down text-xs ml-1"></i>
+            </a>
+            <ul
+              class="dropdown-menu absolute top-full left-0 w-64 bg-[#f4f6f8] text-[#2c3e50] rounded-b-lg shadow-xl border border-gray-200 py-2"
+            >
+              <li>
+                <a
+                  href="#area-anggota"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Area Anggota</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#buku-tamu"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Buku Tamu</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#survey-kebutuhan"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Survey Kebutuhan</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#survey-kepuasan"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Survey Kepuasan</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#pendaftaran-anggota"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >Pendaftaran Anggota Online</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#faq"
+                  class="block px-5 py-2.5 hover:bg-[#e2e8f0] hover:text-[#017a82] transition-colors"
+                  >FAQ</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Tombol OPAC & Ikon Bendera -->
+        <div class="flex items-center gap-4">
+          <button
+            class="bg-white text-[#017a82] font-bold py-2 px-5 rounded text-sm shadow hover:bg-gray-100 transition-colors"
+          >
+            OPAC
+          </button>
+          <div
+            class="w-6 h-4 bg-red-600 relative overflow-hidden hidden sm:block rounded-sm border border-gray-300"
+          >
+            <div class="w-full h-1/2 bg-white absolute bottom-0"></div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- HERO SECTION -->
+      <header
+        id="beranda"
+        data-home-only
+        class="relative hero-bg overflow-hidden pt-16 pb-36 px-4 flex flex-col items-center text-center z-10"
+      >
+        <div class="relative z-10 max-w-3xl">
+          <span
+            class="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm text-green-50 backdrop-blur-sm mb-5"
+          >
+            <i class="fas fa-book-open" aria-hidden="true"></i>
+            Perpustakaan Digital SMA Alfadllu 4 Brebes
+          </span>
+          <h1
+            class="text-white text-4xl md:text-6xl font-bold mb-5 drop-shadow-lg leading-tight"
+          >
+            Buka buku,<br class="sm:hidden" />
+            <span class="text-yellow-300">temukan duniamu.</span>
+          </h1>
+          <p
+            class="text-green-50 text-base md:text-lg font-light mb-8 drop-shadow-md max-w-2xl mx-auto"
+          >
+            Cerita baru, ide baru, dan inspirasi untuk setiap hari. Pilih bacaan
+            favoritmu dan mulai membaca sekarang.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-3">
+            <a
+              href="#buku-seni"
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-yellow-300 px-6 py-3 font-bold text-green-950 shadow-lg hover:bg-yellow-200 transition-colors"
+            >
+              <i class="fas fa-book-reader" aria-hidden="true"></i>
+              Jelajahi Buku
+            </a>
+            <a
+              href="#buku-kurikulum-merdeka"
+              class="inline-flex items-center justify-center gap-2 rounded-full border border-white/60 bg-white/10 px-6 py-3 font-semibold text-white backdrop-blur-sm hover:bg-white/20 transition-colors"
+            >
+              Buku Pelajaran
+              <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- KATEGORI BUKU & PENCARIAN (Overlapping Hero) -->
+      <div
+        data-home-only
+        class="relative z-30 -mt-28 px-4 w-full max-w-6xl mx-auto flex flex-col items-center mb-16"
+      >
+        <!-- Koleksi Unggulan -->
+        <div
+          class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6 w-full max-w-3xl font-sans"
+        >
+          <a
+            href="#buku-seni"
+            class="home-feature-card bg-white text-green-900 flex items-center gap-3 p-4 rounded-2xl shadow-md border border-green-100"
+          >
+            <span
+              class="w-11 h-11 rounded-xl bg-green-100 text-green-800 flex items-center justify-center text-lg"
+            >
+              <i class="fas fa-book-open" aria-hidden="true"></i>
+            </span>
+            <span>
+              <strong class="block text-sm">Novel & Cerita</strong>
+              <small class="text-gray-500">4 buku pilihan</small>
+            </span>
+          </a>
+          <a
+            href="#buku-kurikulum-merdeka"
+            class="home-feature-card bg-white text-green-900 flex items-center gap-3 p-4 rounded-2xl shadow-md border border-green-100"
+          >
+            <span
+              class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg"
+            >
+              <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+            </span>
+            <span>
+              <strong class="block text-sm">Buku Pelajaran</strong>
+              <small class="text-gray-500">Kurikulum Merdeka</small>
+            </span>
+          </a>
+          <a
+            href="#faq"
+            class="home-feature-card col-span-2 sm:col-span-1 bg-white text-green-900 flex items-center gap-3 p-4 rounded-2xl shadow-md border border-green-100"
+          >
+            <span
+              class="w-11 h-11 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-lg"
+            >
+              <i class="fas fa-lightbulb" aria-hidden="true"></i>
+            </span>
+            <span>
+              <strong class="block text-sm">Butuh rekomendasi?</strong>
+              <small class="text-gray-500">Lihat bantuan membaca</small>
+            </span>
+          </a>
+        </div>
+
+        <!-- Search Bar -->
+        <form
+          id="catalog-search"
+          class="bg-white rounded-2xl shadow-lg p-3 md:p-4 flex flex-col md:flex-row items-center w-full max-w-4xl border border-gray-100 gap-3"
+        >
+          <div
+            class="flex items-center gap-3 w-full md:w-auto md:pr-4 md:border-r border-gray-200"
+          >
+            <img
+              src="IMG-20250802-WA0014-removebg-preview.png"
+              alt="Logo SMA Alfadllu 4 Brebes"
+              class="w-12 h-12 md:w-14 md:h-14 object-contain shrink-0"
+              width="56"
+              height="56"
+            />
+            <div class="text-left font-sans">
+              <p class="text-xs text-gray-500">Perpustakaan Digital</p>
+              <p
+                class="font-bold text-[#14532d] text-sm md:text-base whitespace-nowrap"
+              >
+                SMA Alfadllu 4 Brebes
+              </p>
+            </div>
+          </div>
+          <div class="flex-1 w-full relative px-3 py-1">
+            <input
+              id="catalog-query"
+              type="text"
+              placeholder="Cari buku, penulis, subjek..."
+              aria-label="Cari buku, penulis, atau subjek"
+              autocomplete="off"
+              class="w-full bg-transparent border-none focus:outline-none text-gray-700 py-2 text-sm md:text-base font-sans"
+            />
+          </div>
+          <button
+            type="submit"
+            class="bg-[#017a82] hover:bg-[#015f65] text-white rounded-full px-6 py-2 md:px-8 md:py-3 font-semibold transition-colors flex items-center justify-center gap-2 font-sans w-full md:w-auto"
+          >
+            <i class="fas fa-search"></i> Cari
+          </button>
+          <div
+            class="hidden md:flex items-center justify-center px-4 text-gray-400 border-l border-gray-200"
+          >
+            <i
+              class="fas fa-microphone cursor-pointer hover:text-[#017a82] mx-2 transition-colors"
+            ></i>
+            <i
+              class="fas fa-sliders-h cursor-pointer hover:text-[#017a82] mx-2 transition-colors"
+            ></i>
+          </div>
+        </form>
+        <div class="w-full max-w-4xl mt-5 font-sans">
+          <p
+            id="catalog-status"
+            class="text-sm text-gray-600 text-center"
+            role="status"
+            aria-live="polite"
+          ></p>
+          <div
+            id="catalog-results"
+            class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-3"
+          ></div>
+        </div>
+
+        <div
+          class="grid md:grid-cols-[1.2fr_0.8fr] gap-5 w-full max-w-5xl mt-10 text-left font-sans"
+        >
+          <div
+            class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-green-950 via-green-800 to-emerald-700 p-7 md:p-9 text-white shadow-xl"
+          >
+            <div class="relative z-10 max-w-xl">
+              <span
+                class="text-xs uppercase tracking-[0.2em] text-green-200 font-semibold"
+              >
+                Waktunya membaca
+              </span>
+              <h2 class="text-2xl md:text-3xl font-bold mt-3 mb-3">
+                Temukan bacaan yang cocok untukmu
+              </h2>
+              <p class="text-green-50/90 leading-relaxed mb-6">
+                Dari kisah yang menghibur sampai buku yang menambah wawasan,
+                selalu ada hal baru untuk ditemukan.
+              </p>
+              <a
+                href="#buku-seni"
+                class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-bold text-green-900 hover:bg-green-50 transition-colors"
+              >
+                Mulai membaca
+                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+            <i
+              class="fas fa-book-open absolute -right-4 -bottom-8 text-[11rem] text-white/10 rotate-[-18deg]"
+              aria-hidden="true"
+            ></i>
+          </div>
+          <div
+            class="rounded-3xl bg-white border border-gray-100 p-6 md:p-7 shadow-lg flex flex-col justify-between"
+          >
+            <div>
+              <span class="text-sm font-semibold text-green-700">
+                <i class="fas fa-sparkles mr-1" aria-hidden="true"></i>
+                Koleksi perpustakaan
+              </span>
+              <h2 class="text-xl md:text-2xl font-bold text-gray-800 mt-2">
+                Pilih petualanganmu
+              </h2>
+              <p class="text-sm text-gray-600 mt-2">
+                Buka koleksi digital dan baca sesuai minatmu.
+              </p>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mt-6">
+              <a
+                href="#buku-seni"
+                class="rounded-2xl bg-amber-50 p-4 hover:bg-amber-100 transition-colors"
+              >
+                <i
+                  class="fas fa-feather-alt text-amber-700 text-xl"
+                  aria-hidden="true"
+                ></i>
+                <span class="block font-bold text-gray-800 mt-3">Novel</span>
+                <span class="text-xs text-gray-500">4 pilihan</span>
+              </a>
+              <a
+                href="#buku-kurikulum-merdeka"
+                class="rounded-2xl bg-green-50 p-4 hover:bg-green-100 transition-colors"
+              >
+                <i
+                  class="fas fa-graduation-cap text-green-700 text-xl"
+                  aria-hidden="true"
+                ></i>
+                <span class="block font-bold text-gray-800 mt-3"
+                  >Pelajaran</span
+                >
+                <span class="text-xs text-gray-500">7 buku digital</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          aria-labelledby="recommendation-title"
+          class="w-full max-w-5xl mt-8 rounded-3xl border border-green-100 bg-green-50/80 p-5 md:p-7 font-sans"
+        >
+          <div
+            class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+          >
+            <div>
+              <span
+                class="text-xs font-bold uppercase tracking-widest text-green-700"
+              >
+                <i
+                  class="fas fa-wand-magic-sparkles mr-1"
+                  aria-hidden="true"
+                ></i>
+                Rekomendasi untukmu
+              </span>
+              <h2
+                id="recommendation-title"
+                class="text-xl md:text-2xl font-bold text-gray-800 mt-2"
+              >
+                Lagi ingin membaca tentang apa?
+              </h2>
+            </div>
+            <div
+              class="flex flex-wrap gap-2"
+              role="group"
+              aria-label="Pilih minat bacaan"
+            >
+              <button
+                type="button"
+                data-interest="novel"
+                class="interest-button rounded-full bg-white border border-green-200 px-4 py-2 text-sm font-semibold text-green-900 hover:bg-green-100 transition-colors"
+              >
+                Novel
+              </button>
+              <button
+                type="button"
+                data-interest="filsafat"
+                class="interest-button rounded-full bg-white border border-green-200 px-4 py-2 text-sm font-semibold text-green-900 hover:bg-green-100 transition-colors"
+              >
+                Filsafat
+              </button>
+              <button
+                type="button"
+                data-interest="sejarah"
+                class="interest-button rounded-full bg-white border border-green-200 px-4 py-2 text-sm font-semibold text-green-900 hover:bg-green-100 transition-colors"
+              >
+                Sejarah &amp; budaya
+              </button>
+              <button
+                type="button"
+                data-interest="inspirasi"
+                class="interest-button rounded-full bg-white border border-green-200 px-4 py-2 text-sm font-semibold text-green-900 hover:bg-green-100 transition-colors"
+              >
+                Inspirasi
+              </button>
+            </div>
+          </div>
+          <p
+            id="recommendation-status"
+            class="text-sm text-gray-600 mt-4"
+            role="status"
+            aria-live="polite"
+          >
+            Pilih minatmu untuk mendapatkan rekomendasi buku.
+          </p>
+          <div
+            id="recommendation-results"
+            class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-3"
+          ></div>
+        </div>
+      </div>
+
+      <!-- SEJARAH PERPUSTAKAAN -->
+      <section
+        id="sejarah"
+        aria-labelledby="sejarah-title"
+        class="scroll-mt-20 bg-white py-16 px-4"
+      >
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center max-w-3xl mx-auto mb-10">
+            <span
+              class="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase text-[#009b9f] mb-3"
+            >
+              <i class="fas fa-book-open" aria-hidden="true"></i>
+              Tentang Kami
+            </span>
+            <h2
+              id="sejarah-title"
+              class="text-3xl md:text-4xl font-bold text-[#017a82] mb-4"
+            >
+              Sejarah Perpustakaan
+            </h2>
+            <p class="text-gray-600 leading-relaxed">
+              Perpustakaan SMA Alfadllu 4 Brebes merupakan bagian dari
+              lingkungan belajar sekolah yang mendukung kegiatan membaca,
+              belajar, dan pengembangan wawasan.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <article
+              class="bg-[#f8fafc] rounded-2xl border border-gray-100 p-6 md:p-7"
+            >
+              <div
+                class="w-12 h-12 rounded-xl bg-[#e0f2f1] text-[#017a82] flex items-center justify-center text-xl mb-5"
+              >
+                <i class="fas fa-seedling" aria-hidden="true"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#017a82] mb-3">
+                Awal Keberadaan
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Perpustakaan hadir untuk menyediakan bahan bacaan dan sumber
+                belajar bagi warga sekolah. Keberadaannya menjadi salah satu
+                sarana pendukung proses belajar serta kebiasaan membaca di
+                lingkungan sekolah.
+              </p>
+            </article>
+
+            <article
+              class="bg-[#f8fafc] rounded-2xl border border-gray-100 p-6 md:p-7"
+            >
+              <div
+                class="w-12 h-12 rounded-xl bg-[#e0f2f1] text-[#017a82] flex items-center justify-center text-xl mb-5"
+              >
+                <i class="fas fa-book-reader" aria-hidden="true"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#017a82] mb-3">
+                Terus Berkembang
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Sejalan dengan kebutuhan belajar, perpustakaan terus
+                mengembangkan koleksi dan layanan agar dapat dimanfaatkan
+                sebagai tempat mencari informasi, membaca, dan belajar secara
+                mandiri.
+              </p>
+            </article>
+
+            <article
+              class="bg-[#f8fafc] rounded-2xl border border-gray-100 p-6 md:p-7"
+            >
+              <div
+                class="w-12 h-12 rounded-xl bg-[#e0f2f1] text-[#017a82] flex items-center justify-center text-xl mb-5"
+              >
+                <i class="fas fa-laptop" aria-hidden="true"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#017a82] mb-3">
+                Menuju Perpustakaan Digital
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Melalui layanan digital, informasi perpustakaan diharapkan
+                semakin mudah dijangkau. Perpustakaan terus berupaya menumbuhkan
+                budaya literasi dan mendukung pembelajaran yang relevan dengan
+                perkembangan zaman.
+              </p>
+            </article>
+          </div>
+
+          <div
+            class="mt-8 rounded-2xl bg-[#017a82] text-white p-6 md:p-8 text-center"
+          >
+            <i
+              class="fas fa-quote-left text-yellow-400 text-2xl mb-3"
+              aria-hidden="true"
+            ></i>
+            <p class="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
+              Perpustakaan bukan hanya tempat menyimpan buku, tetapi ruang
+              tumbuhnya pengetahuan, rasa ingin tahu, dan semangat belajar.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISI DAN MISI -->
+      <section
+        id="visi-misi"
+        aria-labelledby="visi-misi-title"
+        class="scroll-mt-20 bg-[#f8fafc] py-16 px-4"
+      >
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-10">
+            <h2
+              id="visi-misi-title"
+              class="text-3xl md:text-4xl font-bold text-[#017a82] mb-3"
+            >
+              Visi dan Misi
+            </h2>
+            <p class="text-gray-600">
+              Arah dan komitmen perpustakaan dalam mendukung budaya literasi.
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-6">
+            <article
+              class="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 md:p-9"
+            >
+              <div class="flex items-center gap-3 mb-4 text-[#017a82]">
+                <i class="fas fa-eye text-2xl" aria-hidden="true"></i>
+                <h3 class="text-2xl font-bold">Visi</h3>
+              </div>
+              <p class="text-gray-600 leading-relaxed">
+                Menjadi pusat sumber belajar yang nyaman, inklusif, dan
+                inspiratif untuk menumbuhkan budaya membaca serta mendukung
+                prestasi warga sekolah.
+              </p>
+            </article>
+            <article
+              class="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 md:p-9"
+            >
+              <div class="flex items-center gap-3 mb-4 text-[#017a82]">
+                <i class="fas fa-bullseye text-2xl" aria-hidden="true"></i>
+                <h3 class="text-2xl font-bold">Misi</h3>
+              </div>
+              <ul class="space-y-3 text-gray-600 leading-relaxed">
+                <li class="flex gap-3">
+                  <i
+                    class="fas fa-check text-[#009b9f] mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  Menyediakan koleksi dan sumber informasi yang mendukung
+                  pembelajaran.
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fas fa-check text-[#009b9f] mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  Memberikan layanan perpustakaan yang ramah dan tertib.
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fas fa-check text-[#009b9f] mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  Mendorong kebiasaan membaca, belajar mandiri, dan literasi
+                  digital.
+                </li>
+                <li class="flex gap-3">
+                  <i
+                    class="fas fa-check text-[#009b9f] mt-1"
+                    aria-hidden="true"
+                  ></i>
+                  Mengembangkan perpustakaan sesuai kebutuhan warga sekolah.
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- STRUKTUR ORGANISASI -->
+      <section
+        id="struktur-organisasi"
+        aria-labelledby="struktur-organisasi-title"
+        class="scroll-mt-20 bg-white py-16 px-4"
+      >
+        <div class="max-w-5xl mx-auto text-center">
+          <h2
+            id="struktur-organisasi-title"
+            class="text-3xl md:text-4xl font-bold text-[#017a82] mb-3"
+          >
+            Struktur Organisasi
+          </h2>
+          <p class="text-gray-600 mb-10">
+            Susunan peran berikut dapat disesuaikan dengan struktur resmi
+            sekolah.
+          </p>
+          <div class="flex flex-col items-center gap-4">
+            <div
+              class="w-full max-w-md bg-[#017a82] text-white rounded-xl p-5 shadow-sm"
+            >
+              <i class="fas fa-school text-xl mb-2" aria-hidden="true"></i>
+              <h3 class="font-bold text-lg">Penanggung Jawab</h3>
+              <p class="text-white/80 text-sm">Kepala Sekolah</p>
+            </div>
+            <i class="fas fa-arrow-down text-[#009b9f]" aria-hidden="true"></i>
+            <div
+              class="w-full max-w-md bg-[#e0f2f1] text-[#017a82] rounded-xl p-5"
+            >
+              <i class="fas fa-user-tie text-xl mb-2" aria-hidden="true"></i>
+              <h3 class="font-bold text-lg">Koordinator Perpustakaan</h3>
+              <p class="text-gray-600 text-sm">
+                Koordinasi pengelolaan dan pengembangan layanan
+              </p>
+            </div>
+            <i class="fas fa-arrow-down text-[#009b9f]" aria-hidden="true"></i>
+            <div class="grid sm:grid-cols-2 gap-4 w-full">
+              <div class="bg-[#f8fafc] border border-gray-100 rounded-xl p-5">
+                <i
+                  class="fas fa-book-reader text-xl text-[#017a82] mb-2"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="font-bold text-[#017a82]">Pustakawan / Petugas</h3>
+                <p class="text-gray-600 text-sm">
+                  Pengelolaan koleksi dan layanan pemustaka
+                </p>
+              </div>
+              <div class="bg-[#f8fafc] border border-gray-100 rounded-xl p-5">
+                <i
+                  class="fas fa-users text-xl text-[#017a82] mb-2"
+                  aria-hidden="true"
+                ></i>
+                <h3 class="font-bold text-[#017a82]">Warga Sekolah</h3>
+                <p class="text-gray-600 text-sm">
+                  Guru, tenaga kependidikan, dan peserta didik
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PUSTAKAWAN -->
+      <section
+        id="pustakawan"
+        aria-labelledby="pustakawan-title"
+        class="scroll-mt-20 bg-[#f8fafc] py-16 px-4"
+      >
+        <div class="max-w-4xl mx-auto">
+          <div
+            class="bg-white rounded-2xl border border-gray-100 shadow-sm p-7 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-8"
+          >
+            <div
+              class="w-24 h-24 shrink-0 rounded-full bg-[#e0f2f1] text-[#017a82] flex items-center justify-center"
+            >
+              <i class="fas fa-user-tie text-4xl" aria-hidden="true"></i>
+            </div>
+            <div class="text-center md:text-left">
+              <h2
+                id="pustakawan-title"
+                class="text-3xl font-bold text-[#017a82] mb-3"
+              >
+                Pustakawan
+              </h2>
+              <p class="text-gray-600 leading-relaxed">
+                Pustakawan atau petugas perpustakaan membantu warga sekolah
+                menemukan bahan bacaan, menggunakan layanan, serta menjaga
+                koleksi agar dapat dimanfaatkan bersama. Untuk menampilkan
+                profil resmi, tambahkan nama, foto, dan kualifikasi petugas
+                perpustakaan sekolah.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FASILITAS -->
+      <section
+        id="fasilitas"
+        aria-labelledby="fasilitas-title"
+        class="scroll-mt-20 bg-white py-16 px-4"
+      >
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-10">
+            <h2
+              id="fasilitas-title"
+              class="text-3xl md:text-4xl font-bold text-[#017a82] mb-3"
+            >
+              Fasilitas Perpustakaan
+            </h2>
+            <p class="text-gray-600">
+              Sarana yang mendukung kegiatan membaca, belajar, dan mencari
+              informasi.
+            </p>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <article
+              class="bg-[#f8fafc] rounded-xl border border-gray-100 p-6 text-center"
+            >
+              <i
+                class="fas fa-book text-3xl text-[#017a82] mb-4"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-bold text-[#017a82] mb-2">Koleksi Bacaan</h3>
+              <p class="text-sm text-gray-600">
+                Buku pelajaran, referensi, dan bacaan umum sesuai koleksi yang
+                tersedia.
+              </p>
+            </article>
+            <article
+              class="bg-[#f8fafc] rounded-xl border border-gray-100 p-6 text-center"
+            >
+              <i
+                class="fas fa-chair text-3xl text-[#017a82] mb-4"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-bold text-[#017a82] mb-2">Area Baca</h3>
+              <p class="text-sm text-gray-600">
+                Ruang untuk membaca dan belajar dengan tertib.
+              </p>
+            </article>
+            <article
+              class="bg-[#f8fafc] rounded-xl border border-gray-100 p-6 text-center"
+            >
+              <i
+                class="fas fa-book text-3xl text-[#017a82] mb-4"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-bold text-[#017a82] mb-2">Layanan Sirkulasi</h3>
+              <p class="text-sm text-gray-600">
+                Bantuan peminjaman dan pengembalian koleksi sesuai ketentuan.
+              </p>
+            </article>
+            <article
+              class="bg-[#f8fafc] rounded-xl border border-gray-100 p-6 text-center"
+            >
+              <i
+                class="fas fa-laptop text-3xl text-[#017a82] mb-4"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-bold text-[#017a82] mb-2">Informasi Digital</h3>
+              <p class="text-sm text-gray-600">
+                Akses informasi perpustakaan melalui laman digital ini.
+              </p>
+            </article>
+          </div>
+          <p class="text-xs text-gray-500 text-center mt-5">
+            Sesuaikan daftar fasilitas di atas dengan sarana yang benar-benar
+            tersedia di sekolah.
+          </p>
+        </div>
+      </section>
+
+      <!-- TATA TERTIB -->
+      <section
+        id="tata-tertib"
+        aria-labelledby="tata-tertib-title"
+        class="scroll-mt-20 bg-[#f8fafc] py-16 px-4"
+      >
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-10">
+            <h2
+              id="tata-tertib-title"
+              class="text-3xl md:text-4xl font-bold text-[#017a82] mb-3"
+            >
+              Tata Tertib Perpustakaan
+            </h2>
+            <p class="text-gray-600">
+              Mari menjaga kenyamanan dan koleksi perpustakaan bersama-sama.
+            </p>
+          </div>
+          <ol class="space-y-3">
+            <li
+              class="flex gap-4 bg-white rounded-xl border border-gray-100 p-4"
+            >
+              <span class="font-bold text-[#009b9f]">01</span>
+              <span class="text-gray-700"
+                >Menjaga ketenangan, kebersihan, dan kerapian ruang
+                perpustakaan.</span
+              >
+            </li>
+            <li
+              class="flex gap-4 bg-white rounded-xl border border-gray-100 p-4"
+            >
+              <span class="font-bold text-[#009b9f]">02</span>
+              <span class="text-gray-700"
+                >Menunjukkan sikap sopan dan mengikuti arahan petugas.</span
+              >
+            </li>
+            <li
+              class="flex gap-4 bg-white rounded-xl border border-gray-100 p-4"
+            >
+              <span class="font-bold text-[#009b9f]">03</span>
+              <span class="text-gray-700"
+                >Menggunakan koleksi dengan baik dan mengembalikannya ke tempat
+                yang ditentukan.</span
+              >
+            </li>
+            <li
+              class="flex gap-4 bg-white rounded-xl border border-gray-100 p-4"
+            >
+              <span class="font-bold text-[#009b9f]">04</span>
+              <span class="text-gray-700"
+                >Meminjam dan mengembalikan buku sesuai prosedur serta batas
+                waktu yang berlaku.</span
+              >
+            </li>
+            <li
+              class="flex gap-4 bg-white rounded-xl border border-gray-100 p-4"
+            >
+              <span class="font-bold text-[#009b9f]">05</span>
+              <span class="text-gray-700"
+                >Tidak makan, minum, atau membuat kegiatan yang mengganggu
+                kenyamanan pengunjung lain.</span
+              >
+            </li>
+            <li
+              class="flex gap-4 bg-white rounded-xl border border-gray-100 p-4"
+            >
+              <span class="font-bold text-[#009b9f]">06</span>
+              <span class="text-gray-700"
+                >Menjaga barang pribadi dan melaporkan kehilangan atau kerusakan
+                kepada petugas.</span
+              >
+            </li>
+          </ol>
+          <p class="text-xs text-gray-500 text-center mt-5">
+            Ketentuan peminjaman dan sanksi mengikuti peraturan resmi
+            perpustakaan sekolah.
+          </p>
+        </div>
+      </section>
+
+      <!-- JAM LAYANAN -->
+      <section
+        id="jam-layanan"
+        aria-labelledby="jam-layanan-title"
+        class="scroll-mt-20 bg-white py-16 px-4"
+      >
+        <div class="max-w-3xl mx-auto text-center">
+          <div
+            class="w-16 h-16 rounded-2xl bg-[#e0f2f1] text-[#017a82] flex items-center justify-center text-2xl mx-auto mb-5"
+          >
+            <i class="fas fa-clock" aria-hidden="true"></i>
+          </div>
+          <h2
+            id="jam-layanan-title"
+            class="text-3xl md:text-4xl font-bold text-[#017a82] mb-3"
+          >
+            Jam Layanan
+          </h2>
+          <p class="text-gray-600 mb-7">
+            Silakan berkunjung pada jam operasional perpustakaan.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4 text-left">
+            <div class="bg-[#f8fafc] border border-gray-100 rounded-xl p-5">
+              <p class="text-sm text-gray-500 mb-1">Hari layanan</p>
+              <p class="font-bold text-[#017a82] text-lg">Senin - Jumat</p>
+            </div>
+            <div class="bg-[#f8fafc] border border-gray-100 rounded-xl p-5">
+              <p class="text-sm text-gray-500 mb-1">Waktu layanan</p>
+              <p class="font-bold text-[#017a82] text-lg">07.30 - 15.00 WIB</p>
+            </div>
+          </div>
+          <p class="text-xs text-gray-500 mt-5">
+            Jam layanan mengikuti informasi yang tercantum pada situs dan dapat
+            berubah sesuai kegiatan sekolah.
+          </p>
+        </div>
+      </section>
+
+      <!-- LAYANAN PERPUSTAKAAN -->
+      <section
+        id="layanan-perpustakaan"
+        aria-labelledby="layanan-perpustakaan-title"
+        class="bg-[#f8fafc] py-16 px-4"
+      >
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center max-w-3xl mx-auto mb-10">
+            <span
+              class="inline-flex items-center gap-2 text-sm font-semibold tracking-widest uppercase text-[#009b9f] mb-3"
+            >
+              <i class="fas fa-concierge-bell" aria-hidden="true"></i>
+              Untuk Warga Sekolah
+            </span>
+            <h2
+              id="layanan-perpustakaan-title"
+              class="text-3xl md:text-4xl font-bold text-[#017a82] mb-3"
+            >
+              Layanan Perpustakaan
+            </h2>
+            <p class="text-gray-600 leading-relaxed">
+              Berbagai bentuk bantuan untuk mendukung kegiatan membaca, belajar,
+              dan menemukan informasi. Ketersediaan layanan mengikuti ketentuan
+              serta kondisi perpustakaan sekolah.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <article
+              id="layanan-sirkulasi"
+              class="scroll-mt-20 bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"
+            >
+              <div
+                class="w-12 h-12 rounded-xl bg-[#e0f2f1] text-[#017a82] flex items-center justify-center text-xl mb-4"
+              >
+                <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#017a82] mb-3">
+                Layanan Sirkulasi
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Membantu pemustaka dalam proses peminjaman, pengembalian, dan
+                perpanjangan koleksi sesuai aturan yang berlaku. Silakan
+                menghubungi petugas untuk mengetahui status dan ketentuan buku.
+              </p>
+            </article>
+
+            <article
+              id="layanan-baca"
+              class="scroll-mt-20 bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"
+            >
+              <div
+                class="w-12 h-12 rounded-xl bg-[#e0f2f1] text-[#017a82] flex items-center justify-center text-xl mb-4"
+              >
+                <i class="fas fa-book-reader" aria-hidden="true"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#017a82] mb-3">
+                Layanan Baca di Tempat
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Pemustaka dapat membaca dan memanfaatkan koleksi di ruang
+                perpustakaan. Setelah selesai, letakkan buku di tempat
+                pengembalian atau serahkan kepada petugas agar koleksi tetap
+                tertata.
+              </p>
+            </article>
+
+            <article
+              id="layanan-referensi"
+              class="scroll-mt-20 bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"
+            >
+              <div
+                class="w-12 h-12 rounded-xl bg-[#e0f2f1] text-[#017a82] flex items-center justify-center text-xl mb-4"
+              >
+                <i class="fas fa-atlas" aria-hidden="true"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#017a82] mb-3">
+                Layanan Referensi
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Membantu pemustaka menemukan dan menggunakan sumber rujukan
+                untuk memperoleh informasi yang lebih terarah. Jenis koleksi
+                referensi mengikuti ketersediaan di perpustakaan.
+              </p>
+            </article>
+
+            <article
+              id="layanan-penelusuran"
+              class="scroll-mt-20 bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"
+            >
+              <div
+                class="w-12 h-12 rounded-xl bg-[#e0f2f1] text-[#017a82] flex items-center justify-center text-xl mb-4"
+              >
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#017a82] mb-3">
+                Layanan Penelusuran Informasi
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Petugas dapat membantu mengarahkan pencarian bahan bacaan atau
+                informasi berdasarkan topik, kata kunci, dan kebutuhan tugas
+                pemustaka.
+              </p>
+            </article>
+
+            <article
+              id="layanan-literasi"
+              class="scroll-mt-20 bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"
+            >
+              <div
+                class="w-12 h-12 rounded-xl bg-[#e0f2f1] text-[#017a82] flex items-center justify-center text-xl mb-4"
+              >
+                <i class="fas fa-lightbulb" aria-hidden="true"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#017a82] mb-3">
+                Bimbingan Literasi Informasi
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Bimbingan untuk mengenali kebutuhan informasi, memilih sumber
+                yang relevan dan tepercaya, serta menggunakan informasi secara
+                bertanggung jawab dengan mencantumkan sumber.
+              </p>
+            </article>
+
+            <article
+              id="layanan-konsultasi"
+              class="scroll-mt-20 bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"
+            >
+              <div
+                class="w-12 h-12 rounded-xl bg-[#e0f2f1] text-[#017a82] flex items-center justify-center text-xl mb-4"
+              >
+                <i class="fas fa-comments" aria-hidden="true"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#017a82] mb-3">
+                Layanan Konsultasi
+              </h3>
+              <p class="text-gray-600 leading-relaxed">
+                Pemustaka dapat berkonsultasi dengan petugas tentang penggunaan
+                perpustakaan, pencarian koleksi, dan pemanfaatan sumber
+                informasi untuk kegiatan belajar.
+              </p>
+            </article>
+
+            <article
+              id="layanan-ekstensi"
+              class="scroll-mt-20 bg-white rounded-2xl border border-gray-100 p-6 shadow-sm md:col-span-2 lg:col-span-3"
+            >
+              <div class="flex flex-col sm:flex-row gap-5 items-start">
+                <div
+                  class="w-12 h-12 shrink-0 rounded-xl bg-[#e0f2f1] text-[#017a82] flex items-center justify-center text-xl"
+                >
+                  <i class="fas fa-bullhorn" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-[#017a82] mb-3">
+                    Layanan Ekstensi
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed">
+                    Layanan ekstensi memperluas jangkauan manfaat perpustakaan
+                    kepada warga sekolah, misalnya melalui pengenalan koleksi,
+                    ajakan membaca, berbagi informasi, atau kegiatan literasi di
+                    luar ruang perpustakaan. Bentuk kegiatan disesuaikan dengan
+                    program dan fasilitas sekolah.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- KEANGGOTAAN -->
+      <section
+        id="area-anggota"
+        aria-labelledby="area-anggota-title"
+        class="scroll-mt-20 bg-white py-16 px-4"
+      >
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center max-w-3xl mx-auto mb-10">
+            <span
+              class="text-sm font-semibold tracking-widest uppercase text-[#009b9f]"
+              >Keanggotaan</span
+            >
+            <h2
+              id="area-anggota-title"
+              class="text-3xl md:text-4xl font-bold text-[#017a82] mt-2 mb-3"
+            >
+              Area Anggota
+            </h2>
+            <p class="text-gray-600 leading-relaxed">
+              Informasi bagi peserta didik, guru, dan tenaga kependidikan yang
+              ingin memanfaatkan layanan perpustakaan.
+            </p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-5">
+            <article
+              class="bg-[#f8fafc] rounded-2xl border border-gray-100 p-6"
+            >
+              <i
+                class="fas fa-id-card text-2xl text-[#017a82] mb-4"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-bold text-lg text-[#017a82] mb-2">
+                Menjadi Anggota
+              </h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Warga sekolah dapat mengajukan keanggotaan dengan mengisi
+                formulir pendaftaran dan mengikuti verifikasi petugas.
+              </p>
+            </article>
+            <article
+              class="bg-[#f8fafc] rounded-2xl border border-gray-100 p-6"
+            >
+              <i
+                class="fas fa-book text-2xl text-[#017a82] mb-4"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-bold text-lg text-[#017a82] mb-2">
+                Layanan Anggota
+              </h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Anggota dapat membaca di tempat serta menggunakan layanan
+                peminjaman sesuai koleksi dan ketentuan yang berlaku.
+              </p>
+            </article>
+            <article
+              class="bg-[#f8fafc] rounded-2xl border border-gray-100 p-6"
+            >
+              <i
+                class="fas fa-user-shield text-2xl text-[#017a82] mb-4"
+                aria-hidden="true"
+              ></i>
+              <h3 class="font-bold text-lg text-[#017a82] mb-2">
+                Akun Anggota
+              </h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Fitur masuk akun dan pengecekan pinjaman belum terhubung ke
+                sistem keanggotaan. Silakan konfirmasi status keanggotaan
+                langsung kepada petugas perpustakaan.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- BUKU TAMU -->
+      <section
+        id="buku-tamu"
+        aria-labelledby="buku-tamu-title"
+        class="scroll-mt-20 bg-[#f8fafc] py-16 px-4"
+      >
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-8">
+            <h2
+              id="buku-tamu-title"
+              class="text-3xl font-bold text-[#017a82] mb-3"
+            >
+              Buku Tamu
+            </h2>
+            <p class="text-gray-600">
+              Catat kunjungan Anda ke Perpustakaan SMA Alfadllu 4 Brebes.
+            </p>
+          </div>
+          <form
+            class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8"
+          >
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label
+                  for="guest-name"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Nama</label
+                >
+                <input
+                  id="guest-name"
+                  name="nama"
+                  type="text"
+                  autocomplete="name"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#009b9f]"
+                  placeholder="Nama pengunjung"
+                />
+              </div>
+              <div>
+                <label
+                  for="guest-role"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Status</label
+                >
+                <select
+                  id="guest-role"
+                  name="status"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-[#009b9f]"
+                >
+                  <option value="">Pilih status</option>
+                  <option>Peserta didik</option>
+                  <option>Guru</option>
+                  <option>Tenaga kependidikan</option>
+                  <option>Lainnya</option>
+                </select>
+              </div>
+              <div class="sm:col-span-2">
+                <label
+                  for="guest-purpose"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Keperluan kunjungan</label
+                >
+                <textarea
+                  id="guest-purpose"
+                  name="keperluan"
+                  rows="3"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#009b9f]"
+                  placeholder="Contoh: membaca, meminjam buku, atau mencari referensi"
+                ></textarea>
+              </div>
+            </div>
+            <p class="text-sm text-amber-700 bg-amber-50 rounded-lg p-3 mt-5">
+              Formulir ini belum terhubung ke sistem penyimpanan. Silakan isi
+              buku tamu yang tersedia di perpustakaan.
+            </p>
+            <button
+              type="button"
+              disabled
+              class="mt-4 rounded-lg bg-gray-300 text-gray-600 font-semibold px-6 py-3 cursor-not-allowed"
+            >
+              <i class="fas fa-paper-plane mr-2" aria-hidden="true"></i>Kirim
+              Buku Tamu
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- SURVEI KEBUTUHAN -->
+      <section
+        id="survey-kebutuhan"
+        aria-labelledby="survey-kebutuhan-title"
+        class="scroll-mt-20 bg-white py-16 px-4"
+      >
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-8">
+            <h2
+              id="survey-kebutuhan-title"
+              class="text-3xl font-bold text-[#017a82] mb-3"
+            >
+              Survei Kebutuhan
+            </h2>
+            <p class="text-gray-600">
+              Masukan Anda membantu perpustakaan merencanakan koleksi dan
+              layanan.
+            </p>
+          </div>
+          <form
+            class="bg-[#f8fafc] rounded-2xl border border-gray-100 p-6 md:p-8"
+          >
+            <fieldset class="mb-6">
+              <legend class="font-semibold text-gray-800 mb-3">
+                Koleksi apa yang paling Anda butuhkan?
+              </legend>
+              <div class="grid sm:grid-cols-2 gap-3 text-gray-700">
+                <label class="flex items-center gap-2"
+                  ><input
+                    type="checkbox"
+                    name="koleksi"
+                    value="pelajaran"
+                    class="accent-[#017a82]"
+                  />
+                  Buku pelajaran</label
+                >
+                <label class="flex items-center gap-2"
+                  ><input
+                    type="checkbox"
+                    name="koleksi"
+                    value="referensi"
+                    class="accent-[#017a82]"
+                  />
+                  Buku referensi</label
+                >
+                <label class="flex items-center gap-2"
+                  ><input
+                    type="checkbox"
+                    name="koleksi"
+                    value="fiksi"
+                    class="accent-[#017a82]"
+                  />
+                  Novel dan cerita</label
+                >
+                <label class="flex items-center gap-2"
+                  ><input
+                    type="checkbox"
+                    name="koleksi"
+                    value="digital"
+                    class="accent-[#017a82]"
+                  />
+                  Sumber digital</label
+                >
+              </div>
+            </fieldset>
+            <div class="mb-5">
+              <label
+                for="need-service"
+                class="block font-semibold text-gray-800 mb-2"
+                >Layanan yang ingin ditingkatkan</label
+              >
+              <select
+                id="need-service"
+                name="layanan"
+                class="w-full rounded-lg border border-gray-300 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-[#009b9f]"
+              >
+                <option value="">Pilih layanan</option>
+                <option>Peminjaman dan pengembalian</option>
+                <option>Penelusuran informasi</option>
+                <option>Bimbingan literasi informasi</option>
+                <option>Kenyamanan ruang baca</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+            <div class="mb-5">
+              <label
+                for="need-suggestion"
+                class="block font-semibold text-gray-800 mb-2"
+                >Saran tambahan</label
+              >
+              <textarea
+                id="need-suggestion"
+                name="saran"
+                rows="3"
+                class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#009b9f]"
+                placeholder="Tuliskan kebutuhan atau usulan Anda"
+              ></textarea>
+            </div>
+            <p class="text-sm text-amber-700 bg-amber-50 rounded-lg p-3">
+              Survei ini belum mengirim atau menyimpan jawaban. Sampaikan
+              masukan langsung kepada petugas perpustakaan.
+            </p>
+            <button
+              type="button"
+              disabled
+              class="mt-4 rounded-lg bg-gray-300 text-gray-600 font-semibold px-6 py-3 cursor-not-allowed"
+            >
+              Kirim Survei
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- SURVEI KEPUASAN -->
+      <section
+        id="survey-kepuasan"
+        aria-labelledby="survey-kepuasan-title"
+        class="scroll-mt-20 bg-[#f8fafc] py-16 px-4"
+      >
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-8">
+            <h2
+              id="survey-kepuasan-title"
+              class="text-3xl font-bold text-[#017a82] mb-3"
+            >
+              Survei Kepuasan
+            </h2>
+            <p class="text-gray-600">
+              Bagikan penilaian Anda untuk membantu meningkatkan layanan
+              perpustakaan.
+            </p>
+          </div>
+          <form
+            class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8"
+          >
+            <fieldset class="mb-6">
+              <legend class="font-semibold text-gray-800 mb-3">
+                Bagaimana pengalaman Anda menggunakan layanan perpustakaan?
+              </legend>
+              <div class="flex flex-wrap gap-x-6 gap-y-3 text-gray-700">
+                <label class="flex items-center gap-2"
+                  ><input
+                    type="radio"
+                    name="kepuasan"
+                    value="sangat-puas"
+                    class="accent-[#017a82]"
+                  />
+                  Sangat puas</label
+                >
+                <label class="flex items-center gap-2"
+                  ><input
+                    type="radio"
+                    name="kepuasan"
+                    value="puas"
+                    class="accent-[#017a82]"
+                  />
+                  Puas</label
+                >
+                <label class="flex items-center gap-2"
+                  ><input
+                    type="radio"
+                    name="kepuasan"
+                    value="cukup"
+                    class="accent-[#017a82]"
+                  />
+                  Cukup</label
+                >
+                <label class="flex items-center gap-2"
+                  ><input
+                    type="radio"
+                    name="kepuasan"
+                    value="perlu-ditingkatkan"
+                    class="accent-[#017a82]"
+                  />
+                  Perlu ditingkatkan</label
+                >
+              </div>
+            </fieldset>
+            <div class="mb-5">
+              <label
+                for="satisfaction-comment"
+                class="block font-semibold text-gray-800 mb-2"
+                >Komentar atau saran</label
+              >
+              <textarea
+                id="satisfaction-comment"
+                name="komentar"
+                rows="4"
+                class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#009b9f]"
+                placeholder="Tuliskan pengalaman atau saran Anda"
+              ></textarea>
+            </div>
+            <p class="text-sm text-amber-700 bg-amber-50 rounded-lg p-3">
+              Survei ini belum mengirim atau menyimpan jawaban. Sampaikan
+              masukan langsung kepada petugas perpustakaan.
+            </p>
+            <button
+              type="button"
+              disabled
+              class="mt-4 rounded-lg bg-gray-300 text-gray-600 font-semibold px-6 py-3 cursor-not-allowed"
+            >
+              Kirim Survei
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- PENDAFTARAN ANGGOTA ONLINE -->
+      <section
+        id="pendaftaran-anggota"
+        aria-labelledby="pendaftaran-anggota-title"
+        class="scroll-mt-20 bg-white py-16 px-4"
+      >
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-8">
+            <h2
+              id="pendaftaran-anggota-title"
+              class="text-3xl font-bold text-[#017a82] mb-3"
+            >
+              Pendaftaran Anggota Online
+            </h2>
+            <p class="text-gray-600">
+              Formulir awal untuk warga sekolah yang ingin mendaftar sebagai
+              anggota perpustakaan.
+            </p>
+          </div>
+          <form
+            class="bg-[#f8fafc] rounded-2xl border border-gray-100 p-6 md:p-8"
+          >
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div class="sm:col-span-2">
+                <label
+                  for="member-name"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Nama lengkap</label
+                >
+                <input
+                  id="member-name"
+                  name="nama"
+                  type="text"
+                  autocomplete="name"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#009b9f]"
+                  placeholder="Nama sesuai data sekolah"
+                />
+              </div>
+              <div>
+                <label
+                  for="member-role"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Status</label
+                >
+                <select
+                  id="member-role"
+                  name="status"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-[#009b9f]"
+                >
+                  <option value="">Pilih status</option>
+                  <option>Peserta didik</option>
+                  <option>Guru</option>
+                  <option>Tenaga kependidikan</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  for="member-class"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Kelas / unit kerja</label
+                >
+                <input
+                  id="member-class"
+                  name="kelas-unit"
+                  type="text"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#009b9f]"
+                  placeholder="Contoh: XI atau nama unit"
+                />
+              </div>
+              <div class="sm:col-span-2">
+                <label
+                  for="member-email"
+                  class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Email (opsional)</label
+                >
+                <input
+                  id="member-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#009b9f]"
+                  placeholder="nama@email.com"
+                />
+              </div>
+            </div>
+            <p class="text-sm text-amber-700 bg-amber-50 rounded-lg p-3 mt-5">
+              Pendaftaran online belum terhubung ke sistem sekolah. Data pada
+              formulir ini tidak akan dikirim atau disimpan. Hubungi petugas
+              perpustakaan untuk mendaftar.
+            </p>
+            <button
+              type="button"
+              disabled
+              class="mt-4 rounded-lg bg-gray-300 text-gray-600 font-semibold px-6 py-3 cursor-not-allowed"
+            >
+              <i class="fas fa-user-plus mr-2" aria-hidden="true"></i>Kirim
+              Pendaftaran
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section
+        id="faq"
+        aria-labelledby="faq-title"
+        class="scroll-mt-20 bg-[#f8fafc] py-16 px-4"
+      >
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-8">
+            <h2
+              id="faq-title"
+              class="text-3xl md:text-4xl font-bold text-[#017a82] mb-3"
+            >
+              Pertanyaan Umum (FAQ)
+            </h2>
+            <p class="text-gray-600">
+              Jawaban singkat seputar layanan perpustakaan.
+            </p>
+          </div>
+          <div class="space-y-3">
+            <details
+              class="group bg-white rounded-xl border border-gray-100 p-5"
+            >
+              <summary
+                class="cursor-pointer font-semibold text-[#017a82] flex justify-between gap-4"
+              >
+                Siapa yang dapat menggunakan perpustakaan?
+                <i
+                  class="fas fa-chevron-down text-sm mt-1 group-open:rotate-180 transition-transform"
+                  aria-hidden="true"
+                ></i>
+              </summary>
+              <p class="text-gray-600 leading-relaxed mt-3">
+                Layanan perpustakaan ditujukan bagi warga sekolah. Pengunjung
+                lain dapat menanyakan ketentuan kunjungan kepada petugas.
+              </p>
+            </details>
+            <details
+              class="group bg-white rounded-xl border border-gray-100 p-5"
+            >
+              <summary
+                class="cursor-pointer font-semibold text-[#017a82] flex justify-between gap-4"
+              >
+                Bagaimana cara menjadi anggota?
+                <i
+                  class="fas fa-chevron-down text-sm mt-1 group-open:rotate-180 transition-transform"
+                  aria-hidden="true"
+                ></i>
+              </summary>
+              <p class="text-gray-600 leading-relaxed mt-3">
+                Warga sekolah dapat mengajukan pendaftaran melalui petugas
+                perpustakaan. Formulir online pada halaman ini belum aktif.
+              </p>
+            </details>
+            <details
+              class="group bg-white rounded-xl border border-gray-100 p-5"
+            >
+              <summary
+                class="cursor-pointer font-semibold text-[#017a82] flex justify-between gap-4"
+              >
+                Berapa lama buku boleh dipinjam?
+                <i
+                  class="fas fa-chevron-down text-sm mt-1 group-open:rotate-180 transition-transform"
+                  aria-hidden="true"
+                ></i>
+              </summary>
+              <p class="text-gray-600 leading-relaxed mt-3">
+                Lama peminjaman mengikuti ketentuan yang berlaku di
+                perpustakaan. Tanyakan batas waktu pengembalian kepada petugas
+                saat meminjam.
+              </p>
+            </details>
+            <details
+              class="group bg-white rounded-xl border border-gray-100 p-5"
+            >
+              <summary
+                class="cursor-pointer font-semibold text-[#017a82] flex justify-between gap-4"
+              >
+                Kapan perpustakaan buka?
+                <i
+                  class="fas fa-chevron-down text-sm mt-1 group-open:rotate-180 transition-transform"
+                  aria-hidden="true"
+                ></i>
+              </summary>
+              <p class="text-gray-600 leading-relaxed mt-3">
+                Informasi pada situs mencantumkan Senin–Jumat, pukul 07.30–15.00
+                WIB. Jam layanan dapat berubah mengikuti kegiatan sekolah.
+              </p>
+            </details>
+            <details
+              class="group bg-white rounded-xl border border-gray-100 p-5"
+            >
+              <summary
+                class="cursor-pointer font-semibold text-[#017a82] flex justify-between gap-4"
+              >
+                Bagaimana jika buku yang dicari tidak ditemukan?
+                <i
+                  class="fas fa-chevron-down text-sm mt-1 group-open:rotate-180 transition-transform"
+                  aria-hidden="true"
+                ></i>
+              </summary>
+              <p class="text-gray-600 leading-relaxed mt-3">
+                Mintalah bantuan petugas untuk menelusuri koleksi atau
+                mendapatkan saran sumber informasi lain yang tersedia.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- KOLEKSI BUKU SENI -->
+      <section
+        id="buku-seni"
+        aria-labelledby="buku-seni-title"
+        class="bg-[#f8fafc] py-12 px-4 scroll-mt-20"
+      >
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-8">
+            <h2
+              id="buku-seni-title"
+              class="text-2xl md:text-3xl font-bold text-[#017a82] mb-3"
+            >
+              Koleksi Buku Seni
+            </h2>
+          </div>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 font-sans"
+          >
+            <article
+              class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col"
+            >
+              <a
+                href="BUKU%20NOVEL%20RANDOM/Dunia%20Sophie%20-%20CraftopiaDigital.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Buka buku Dunia Sophie"
+              >
+                <iframe
+                  src="BUKU%20NOVEL%20RANDOM/Dunia%20Sophie%20-%20CraftopiaDigital.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0"
+                  title="Sampul buku Dunia Sophie"
+                  class="w-full h-72 bg-gray-100 pointer-events-none"
+                  loading="lazy"
+                  aria-label="Pratinjau sampul Dunia Sophie"
+                ></iframe>
+              </a>
+              <div class="p-5 flex flex-col flex-grow">
+                <h3 class="font-bold text-gray-800 text-lg">Dunia Sophie</h3>
+                <p class="text-sm text-gray-500 mt-1 mb-4">Jostein Gaarder</p>
+                <a
+                  href="BUKU%20NOVEL%20RANDOM/Dunia%20Sophie%20-%20CraftopiaDigital.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors"
+                >
+                  <i class="fas fa-book-open" aria-hidden="true"></i> Buka Buku
+                </a>
+              </div>
+            </article>
+            <article
+              class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col"
+            >
+              <a
+                href="BUKU%20NOVEL%20RANDOM/Laut%20Bercerita.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Buka buku Laut Bercerita"
+              >
+                <iframe
+                  src="BUKU%20NOVEL%20RANDOM/Laut%20Bercerita.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0"
+                  title="Sampul buku Laut Bercerita"
+                  class="w-full h-72 bg-gray-100 pointer-events-none"
+                  loading="lazy"
+                  aria-label="Pratinjau sampul Laut Bercerita"
+                ></iframe>
+              </a>
+              <div class="p-5 flex flex-col flex-grow">
+                <h3 class="font-bold text-gray-800 text-lg">Laut Bercerita</h3>
+                <p class="text-sm text-gray-500 mt-1 mb-4">Leila S. Chudori</p>
+                <a
+                  href="BUKU%20NOVEL%20RANDOM/Laut%20Bercerita.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors"
+                >
+                  <i class="fas fa-book-open" aria-hidden="true"></i> Buka Buku
+                </a>
+              </div>
+            </article>
+            <article
+              class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col"
+            >
+              <a
+                href="BUKU%20NOVEL%20RANDOM/Ronggeng%20Dukuh%20Paruk%20-%20eBookWave.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Buka buku Ronggeng Dukuh Paruk"
+              >
+                <iframe
+                  src="BUKU%20NOVEL%20RANDOM/Ronggeng%20Dukuh%20Paruk%20-%20eBookWave.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0"
+                  title="Sampul buku Ronggeng Dukuh Paruk"
+                  class="w-full h-72 bg-gray-100 pointer-events-none"
+                  loading="lazy"
+                  aria-label="Pratinjau sampul Ronggeng Dukuh Paruk"
+                ></iframe>
+              </a>
+              <div class="p-5 flex flex-col flex-grow">
+                <h3 class="font-bold text-gray-800 text-lg">
+                  Ronggeng Dukuh Paruk
+                </h3>
+                <p class="text-sm text-gray-500 mt-1 mb-4">Ahmad Tohari</p>
+                <a
+                  href="BUKU%20NOVEL%20RANDOM/Ronggeng%20Dukuh%20Paruk%20-%20eBookWave.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors"
+                >
+                  <i class="fas fa-book-open" aria-hidden="true"></i> Buka Buku
+                </a>
+              </div>
+            </article>
+            <article
+              class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col"
+            >
+              <a
+                href="BUKU%20NOVEL%20RANDOM/Tere%20Liye%20-%20Janji%20(1).pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Buka buku Janji"
+              >
+                <iframe
+                  src="BUKU%20NOVEL%20RANDOM/Tere%20Liye%20-%20Janji%20(1).pdf#page=1&toolbar=0&navpanes=0&scrollbar=0"
+                  title="Sampul buku Janji"
+                  class="w-full h-72 bg-gray-100 pointer-events-none"
+                  loading="lazy"
+                  aria-label="Pratinjau sampul Janji"
+                ></iframe>
+              </a>
+              <div class="p-5 flex flex-col flex-grow">
+                <h3 class="font-bold text-gray-800 text-lg">Janji</h3>
+                <p class="text-sm text-gray-500 mt-1 mb-4">Tere Liye</p>
+                <a
+                  href="BUKU%20NOVEL%20RANDOM/Tere%20Liye%20-%20Janji%20(1).pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors"
+                >
+                  <i class="fas fa-book-open" aria-hidden="true"></i> Buka Buku
+                </a>
+              </div>
+            </article>
+          </div>
+          <p class="text-sm text-gray-500 text-center mt-6 font-sans">
+            Sampul diambil dari halaman pertama setiap PDF. Pastikan folder BUKU
+            NOVEL RANDOM tetap berada di folder yang sama dengan halaman ini.
+          </p>
+        </div>
+      </section>
+
+      <!-- BUKU ELEKTRONIK SECTION -->
+      <section class="py-12 px-4 max-w-6xl mx-auto w-full text-center">
+        <h2
+          class="text-2xl md:text-3xl font-bold text-[#017a82] mb-8 flex justify-center items-center gap-3"
+        >
+          <i class="fas fa-graduation-cap"></i> Buku Elektronik Kemendikdasmen
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
+          <a
+            href="#buku-kurikulum-merdeka"
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 flex flex-col items-center hover:shadow-md transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-4 text-blue-600"
+            >
+              <i class="fas fa-graduation-cap text-3xl"></i>
+            </div>
+            <h3 class="font-bold text-[#017a82]">Kurikulum Merdeka</h3>
+            <span class="text-sm text-gray-500 mt-2">Lihat 7 buku digital</span>
+          </a>
+          <div
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 flex flex-col items-center hover:shadow-md transition-shadow cursor-pointer"
+          >
+            <div
+              class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-4 text-red-500"
+            >
+              <i class="fas fa-book text-3xl"></i>
+            </div>
+            <h3 class="font-bold text-red-500">Buku Teks K-13</h3>
+          </div>
+          <div
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 flex flex-col items-center hover:shadow-md transition-shadow cursor-pointer"
+          >
+            <div
+              class="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mb-4 text-cyan-600"
+            >
+              <i class="fas fa-newspaper text-3xl"></i>
+            </div>
+            <h3 class="font-bold text-cyan-600">Buku Non-Teks</h3>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="buku-kurikulum-merdeka"
+        aria-labelledby="buku-kurikulum-merdeka-title"
+        class="bg-[#f8fafc] py-12 px-4 scroll-mt-20"
+      >
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-8">
+            <h2
+              id="buku-kurikulum-merdeka-title"
+              class="text-2xl md:text-3xl font-bold text-[#017a82] mb-3"
+            >
+              Buku Kurikulum Merdeka
+            </h2>
+            <p class="text-gray-600 font-sans">
+              Pilih buku untuk membukanya dalam format PDF.
+            </p>
+          </div>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 font-sans"
+          >
+            <article
+              class="bg-white rounded-xl border border-gray-100 p-5 shadow-sm flex flex-col"
+            >
+              <div class="flex items-start gap-4 mb-5">
+                <span
+                  class="w-11 h-11 shrink-0 rounded-lg bg-green-100 text-green-800 flex items-center justify-center font-bold"
+                  >01</span
+                >
+                <div class="min-w-0">
+                  <h3 class="font-bold text-gray-800">Buku Digital 1</h3>
+                  <p class="text-xs text-gray-500 break-all mt-1">
+                    kemdik_567_e5916f19.pdf
+                  </p>
+                </div>
+              </div>
+              <a
+                href="file:///C:/Users/mp2c9/Downloads/kemdik_567_e5916f19.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors"
+              >
+                <i class="fas fa-book-open" aria-hidden="true"></i> Buka PDF
+              </a>
+            </article>
+            <article
+              class="bg-white rounded-xl border border-gray-100 p-5 shadow-sm flex flex-col"
+            >
+              <div class="flex items-start gap-4 mb-5">
+                <span
+                  class="w-11 h-11 shrink-0 rounded-lg bg-green-100 text-green-800 flex items-center justify-center font-bold"
+                  >02</span
+                >
+                <div class="min-w-0">
+                  <h3 class="font-bold text-gray-800">Buku Digital 2</h3>
+                  <p class="text-xs text-gray-500 break-all mt-1">
+                    kemdik_3737_fe3e4557.pdf
+                  </p>
+                </div>
+              </div>
+              <a
+                href="file:///C:/Users/mp2c9/Downloads/kemdik_3737_fe3e4557.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors"
+              >
+                <i class="fas fa-book-open" aria-hidden="true"></i> Buka PDF
+              </a>
+            </article>
+            <article
+              class="bg-white rounded-xl border border-gray-100 p-5 shadow-sm flex flex-col"
+            >
+              <div class="flex items-start gap-4 mb-5">
+                <span
+                  class="w-11 h-11 shrink-0 rounded-lg bg-green-100 text-green-800 flex items-center justify-center font-bold"
+                  >03</span
+                >
+                <div class="min-w-0">
+                  <h3 class="font-bold text-gray-800">Buku Digital 3</h3>
+                  <p class="text-xs text-gray-500 break-all mt-1">
+                    kemdik_3859_2daf9c27.pdf
+                  </p>
+                </div>
+              </div>
+              <a
+                href="file:///C:/Users/mp2c9/Downloads/kemdik_3859_2daf9c27.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors"
+              >
+                <i class="fas fa-book-open" aria-hidden="true"></i> Buka PDF
+              </a>
+            </article>
+            <article
+              class="bg-white rounded-xl border border-gray-100 p-5 shadow-sm flex flex-col"
+            >
+              <div class="flex items-start gap-4 mb-5">
+                <span
+                  class="w-11 h-11 shrink-0 rounded-lg bg-green-100 text-green-800 flex items-center justify-center font-bold"
+                  >04</span
+                >
+                <div class="min-w-0">
+                  <h3 class="font-bold text-gray-800">Buku Digital 4</h3>
+                  <p class="text-xs text-gray-500 break-all mt-1">
+                    kemdik_3809_88624c0a.pdf
+                  </p>
+                </div>
+              </div>
+              <a
+                href="file:///C:/Users/mp2c9/Downloads/kemdik_3809_88624c0a.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors"
+              >
+                <i class="fas fa-book-open" aria-hidden="true"></i> Buka PDF
+              </a>
+            </article>
+            <article
+              class="bg-white rounded-xl border border-gray-100 p-5 shadow-sm flex flex-col"
+            >
+              <div class="flex items-start gap-4 mb-5">
+                <span
+                  class="w-11 h-11 shrink-0 rounded-lg bg-green-100 text-green-800 flex items-center justify-center font-bold"
+                  >05</span
+                >
+                <div class="min-w-0">
+                  <h3 class="font-bold text-gray-800">Buku Digital 5</h3>
+                  <p class="text-xs text-gray-500 break-all mt-1">
+                    kemdik_3259_d447dabb.pdf
+                  </p>
+                </div>
+              </div>
+              <a
+                href="file:///C:/Users/mp2c9/Downloads/kemdik_3259_d447dabb.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors"
+              >
+                <i class="fas fa-book-open" aria-hidden="true"></i> Buka PDF
+              </a>
+            </article>
+            <article
+              class="bg-white rounded-xl border border-gray-100 p-5 shadow-sm flex flex-col"
+            >
+              <div class="flex items-start gap-4 mb-5">
+                <span
+                  class="w-11 h-11 shrink-0 rounded-lg bg-green-100 text-green-800 flex items-center justify-center font-bold"
+                  >06</span
+                >
+                <div class="min-w-0">
+                  <h3 class="font-bold text-gray-800">Buku Digital 6</h3>
+                  <p class="text-xs text-gray-500 break-all mt-1">
+                    kemdik_1524_8507d7d2.pdf
+                  </p>
+                </div>
+              </div>
+              <a
+                href="file:///C:/Users/mp2c9/Downloads/kemdik_1524_8507d7d2.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors"
+              >
+                <i class="fas fa-book-open" aria-hidden="true"></i> Buka PDF
+              </a>
+            </article>
+            <article
+              class="bg-white rounded-xl border border-gray-100 p-5 shadow-sm flex flex-col"
+            >
+              <div class="flex items-start gap-4 mb-5">
+                <span
+                  class="w-11 h-11 shrink-0 rounded-lg bg-green-100 text-green-800 flex items-center justify-center font-bold"
+                  >07</span
+                >
+                <div class="min-w-0">
+                  <h3 class="font-bold text-gray-800">Buku Digital 7</h3>
+                  <p class="text-xs text-gray-500 break-all mt-1">
+                    kemdik_1485_1b158ddd.pdf
+                  </p>
+                </div>
+              </div>
+              <a
+                href="file:///C:/Users/mp2c9/Downloads/kemdik_1485_1b158ddd.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors"
+              >
+                <i class="fas fa-book-open" aria-hidden="true"></i> Buka PDF
+              </a>
+            </article>
+          </div>
+          <p class="text-sm text-gray-500 text-center mt-6 font-sans">
+            Tautan PDF mengarah ke folder Downloads di komputer ini dan tidak
+            akan berfungsi jika situs dipindahkan atau dibuka di perangkat lain.
+          </p>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer
+        class="bg-[#015f65] text-white pt-8 pb-6 mt-auto border-t-4 border-yellow-400"
+      >
+        <div class="max-w-6xl mx-auto px-4 text-center font-sans">
+          <p class="text-sm text-gray-200">
+            &copy; 2026 Perpustakaan Digital SMA ALFADLLU 4 BREBES. All rights
+            reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- SCRIPT LOADING SCREEN -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const loadingScreen = document.getElementById("loading-screen");
+        const mainContent = document.getElementById("main-content");
+        const pageSections = Array.from(
+          mainContent.querySelectorAll("section"),
+        );
+        const homeElements = Array.from(
+          mainContent.querySelectorAll("[data-home-only]"),
+        );
+
+        const showCurrentPage = () => {
+          const pageId = decodeURIComponent(location.hash.slice(1));
+          const isHome = !pageId || pageId === "beranda";
+          const target = isHome ? null : document.getElementById(pageId);
+          const targetSection = target?.closest("section") ?? null;
+
+          if (!isHome && !targetSection) {
+            location.hash = "beranda";
+            return;
+          }
+
+          homeElements.forEach((element) => {
+            element.hidden = !isHome;
+          });
+          pageSections.forEach((section) => {
+            section.hidden = isHome || section !== targetSection;
+          });
+
+          const serviceCards = mainContent.querySelectorAll(
+            "#layanan-perpustakaan article[id^='layanan-']",
+          );
+          serviceCards.forEach((card) => {
+            card.hidden =
+              targetSection?.id === "layanan-perpustakaan" &&
+              card.id !== pageId;
+          });
+
+          mainContent.dataset.view = isHome ? "home" : pageId;
+        };
+
+        mainContent.addEventListener("click", (event) => {
+          const link = event.target.closest("a[href^='#']");
+          if (!link || link.getAttribute("href") === "#") return;
+
+          event.preventDefault();
+          const destination = link.getAttribute("href");
+          if (location.hash === destination) {
+            showCurrentPage();
+            window.scrollTo(0, 0);
+          } else {
+            location.hash = destination.slice(1);
+          }
+        });
+        window.addEventListener("hashchange", () => {
+          showCurrentPage();
+          window.scrollTo(0, 0);
+        });
+        showCurrentPage();
+
+        const searchForm = document.getElementById("catalog-search");
+        const searchInput = document.getElementById("catalog-query");
+        const searchStatus = document.getElementById("catalog-status");
+        const searchResults = document.getElementById("catalog-results");
+        const recommendationStatus = document.getElementById(
+          "recommendation-status",
+        );
+        const recommendationResults = document.getElementById(
+          "recommendation-results",
+        );
+
+        const renderBooks = (container, books) => {
+          container.replaceChildren();
+          books.forEach((book) => {
+            const card = document.createElement("article");
+            card.className =
+              "book-result-card rounded-2xl border border-green-100 bg-white p-5 shadow-sm flex flex-col";
+
+            const category = document.createElement("span");
+            category.className =
+              "text-xs font-semibold uppercase tracking-wide text-green-700";
+            category.textContent = book.category;
+
+            const title = document.createElement("h3");
+            title.className = "text-lg font-bold text-gray-800 mt-2";
+            title.textContent = book.title;
+
+            const author = document.createElement("p");
+            author.className = "text-sm text-gray-600 mt-1 mb-4";
+            author.textContent = book.author;
+
+            const link = document.createElement("a");
+            link.className =
+              "mt-auto inline-flex items-center justify-center gap-2 rounded-lg bg-green-800 hover:bg-green-900 text-white font-semibold px-4 py-2.5 transition-colors";
+            link.href = book.url;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.innerHTML =
+              '<i class="fas fa-book-open" aria-hidden="true"></i> Buka Buku';
+
+            card.append(category, title, author, link);
+            container.append(card);
+          });
+        };
+
+        const loadBooks = async (endpoint, container, status, emptyMessage) => {
+          status.textContent = "Sedang mencari buku...";
+          container.replaceChildren();
+          try {
+            const response = await fetch(endpoint);
+            const result = await response.json();
+            if (!response.ok) {
+              throw new Error(result.error || "Permintaan tidak berhasil.");
+            }
+            renderBooks(container, result.books);
+            status.textContent = result.books.length
+              ? `${result.books.length} buku ditemukan.`
+              : emptyMessage;
+          } catch (error) {
+            console.error("Gagal memuat katalog buku:", error);
+            status.textContent =
+              "Fitur katalog memerlukan server Python. Jalankan `python app.py`, lalu buka http://127.0.0.1:8000.";
+          }
+        };
+
+        searchForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const query = searchInput.value.trim();
+          if (!query) {
+            searchStatus.textContent =
+              "Masukkan judul, nama penulis, atau minat bacaan.";
+            searchResults.replaceChildren();
+            searchInput.focus();
+            return;
+          }
+          loadBooks(
+            `/api/search?q=${encodeURIComponent(query)}`,
+            searchResults,
+            searchStatus,
+            "Belum ada buku yang cocok. Coba judul atau nama penulis lain.",
+          );
+        });
+
+        mainContent.querySelectorAll("[data-interest]").forEach((button) => {
+          button.addEventListener("click", () => {
+            mainContent
+              .querySelectorAll("[data-interest]")
+              .forEach((interestButton) => {
+                interestButton.setAttribute(
+                  "aria-pressed",
+                  String(interestButton === button),
+                );
+              });
+            loadBooks(
+              `/api/recommendations?interest=${encodeURIComponent(button.dataset.interest)}`,
+              recommendationResults,
+              recommendationStatus,
+              "Belum ada buku untuk minat ini. Silakan coba minat lain.",
+            );
+          });
+        });
+
+        // Simulasi loading 3 detik
+        setTimeout(() => {
+          loadingScreen.classList.add("opacity-0");
+
+          setTimeout(() => {
+            loadingScreen.classList.add("hidden");
+            mainContent.classList.remove("hidden");
+
+            setTimeout(() => {
+              mainContent.classList.remove("opacity-0");
+              mainContent.classList.add("opacity-100");
+            }, 50);
+          }, 500);
+        }, 3000);
+      });
+    </script>
+  </body>
+</html>
